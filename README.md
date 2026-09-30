@@ -2,9 +2,13 @@
 
 **Turning everyday purchases into digital value.**
 
-iSmartBonus is a universal loyalty ecosystem that connects customers, merchants, online services, and blockchain infrastructure in one platform.
+iSmartBonus is a universal loyalty ecosystem that connects customers, physical merchants, online marketplaces, affiliate partners, and Solana-based digital asset infrastructure in one platform.
 
-Instead of receiving traditional loyalty points that are locked to one merchant, expire, or cannot be withdrawn, users receive bonuses backed by the ISB digital asset on Solana.
+Traditional loyalty points are usually locked to one merchant, may expire, and often cannot be converted into real value.
+
+iSmartBonus is building a different model: one loyalty ecosystem where rewards from everyday purchases can generate digital value for the customer.
+
+---
 
 ## The Problem
 
@@ -14,52 +18,113 @@ Traditional loyalty programs have three major limitations:
 2. Rewards often expire.
 3. Rewards usually cannot be converted into real value.
 
-This creates fragmented loyalty systems where customers accumulate points across many different businesses but have limited ways to use them.
+As a result, customers accumulate fragmented balances across different stores and services with limited flexibility.
+
+---
 
 ## Our Solution
 
-iSmartBonus creates a shared loyalty ecosystem.
+iSmartBonus creates a shared loyalty ecosystem for both offline and online commerce.
 
-Customers can earn bonuses from participating offline merchants and online services within the same platform.
+Customers can earn bonuses from participating physical merchants as well as supported online marketplaces, travel services, and affiliate partners.
 
 Each eligible bonus corresponds to ISB, a Solana SPL token used as the digital asset layer of the ecosystem.
 
-Bonuses:
+iSmartBonus bonuses:
 
 - are not limited to a single merchant;
 - do not expire;
-- are backed by a digital asset;
-- can become eligible for withdrawal according to platform rules.
+- are connected to a digital asset;
+- can become eligible for withdrawal according to platform rules;
+- can be earned without the customer purchasing cryptocurrency.
 
 The goal is simple:
 
-**Make everyday purchases generate long-term digital value for the customer.**
+**Turn everyday purchases into digital value.**
+
+---
 
 ## How It Works
 
-The basic flow is:
+iSmartBonus supports two main purchase flows.
+
+### Offline Purchases
+
+For physical merchants, iSmartBonus uses a signed QR-based identification flow.
 
 ```text
-Customer Purchase
-        ↓
-Merchant / Affiliate Partner
-        ↓
-iSmartBonus Purchase Verification
-        ↓
+Customer
+    ↓
+Physical Merchant
+    ↓
+Signed iSmartBonus QR
+    ↓
+User Identification
+    ↓
+Purchase Verification
+    ↓
 Bonus Calculation
-        ↓
+    ↓
 ISB Digital Asset Reserve
-        ↓
+    ↓
 User Bonus Balance
-        ↓
+    ↓
 Lock / Unlock / Burn Rules
-        ↓
+    ↓
 Eligible Withdrawal
 ```
 
-Merchants only fund rewards when real purchases occur under the performance-based model.
+The QR payload is cryptographically signed and verified by the platform before it can be accepted.
 
-iSmartBonus can also support a SaaS model where businesses pay a fixed platform fee while their loyalty budget is directed toward customer bonuses.
+QR identification is used only for physical merchant transactions.
+
+### Online Purchases
+
+Online marketplaces and affiliate partners do not require QR identification.
+
+The online flow uses tracked links and partner or affiliate reporting to attribute eligible purchases to iSmartBonus users.
+
+```text
+Customer
+    ↓
+iSmartBonus
+    ↓
+Tracked Partner / Affiliate Link
+    ↓
+Online Merchant
+    ↓
+Purchase / Commission Confirmation
+    ↓
+User Attribution
+    ↓
+Bonus Calculation
+    ↓
+ISB Digital Asset Reserve
+    ↓
+User Bonus Balance
+```
+
+This architecture allows the same bonus ecosystem to support both physical and online commerce while using different purchase-verification mechanisms.
+
+---
+
+## Business Model
+
+iSmartBonus supports multiple merchant models.
+
+### Performance-Based Model
+
+The merchant defines a loyalty commission for eligible purchases.
+
+iSmartBonus receives value only when a real purchase occurs and distributes the applicable portion according to the platform's bonus and revenue rules.
+
+### SaaS Model
+
+Businesses can pay a fixed platform subscription while their loyalty budget is directed toward customer bonuses.
+
+This gives merchants flexibility in how they participate in the ecosystem while keeping the customer experience unified.
+
+---
 
 ## Solana
 
@@ -67,20 +132,22 @@ Solana provides the blockchain infrastructure for the digital asset layer of iSm
 
 The ecosystem uses the **ISB SPL token**.
 
-- Network: Solana
-- Token: ISB
-- Mint Address: `GDWtjpjHjtfJ3vD4tEePvHL5BxX6AMS3uQNBGM8jx61W`
-- Total supply: 100,000,000 ISB
-- Decimals: 6
-- 1 bonus unit = 1 ISB
+- **Network:** Solana
+- **Token:** ISB
+- **Mint Address:** `GDWtjpjHjtfJ3vD4tEePvHL5BxX6AMS3uQNBGM8jx61W`
+- **Total Supply:** 100,000,000 ISB
+- **Decimals:** 6
+- **Bonus Mapping:** 1 bonus unit = 1 ISB
 
-The blockchain layer provides a transparent digital asset infrastructure while the consumer experience remains simple.
+Users do not need to buy ISB or invest their own money in order to participate in the loyalty ecosystem.
 
-Users do not need to purchase ISB in order to participate in the loyalty ecosystem.
+The blockchain layer operates behind the consumer experience while providing the digital asset infrastructure for the bonus model.
+
+---
 
 ## Scarcity Mechanics
 
-iSmartBonus uses rules designed to control the circulating supply of bonus-related digital assets.
+iSmartBonus uses bonus and token rules designed to connect platform activity with digital asset scarcity.
 
 These include:
 
@@ -89,34 +156,56 @@ These include:
 - additional burn rules when applicable;
 - withdrawal limits linked to verified customer spending.
 
-These mechanisms connect platform usage with the digital asset economy.
+The objective is to create a loyalty asset whose economics are connected to real commercial activity rather than simply issuing unlimited traditional reward points.
+
+---
 
 ## Product Architecture
 
-iSmartBonus currently combines:
+The current iSmartBonus platform combines:
 
 - WordPress
 - PHP
 - JavaScript
 - REST APIs
-- Merchant integrations
-- Affiliate integrations
+- Physical merchant integrations
+- Affiliate and online merchant integrations
+- Signed QR authentication for offline purchases
 - Solana
 - SPL Token infrastructure
 
-The existing WordPress application handles the consumer and merchant experience, while custom modules connect purchases, bonus calculations, partner operations, and blockchain-related processes.
+At a high level:
 
-## Hackathon Development
+```text
+                    ┌─────────────────────┐
+                    │     iSmartBonus     │
+                    │      Platform       │
+                    └──────────┬──────────┘
+                               │
+              ┌────────────────┴────────────────┐
+              │                                 │
+      Offline Commerce                  Online Commerce
+              │                                 │
+      Signed Partner QR                  Tracked Links
+              │                                 │
+      Physical Merchant              Marketplace / Affiliate
+              │                                 │
+              └───────────────┬─────────────────┘
+                              │
+                      Purchase Verification
+                              │
+                        Bonus Engine
+                              │
+                         ISB / Solana
+                              │
+                      User Bonus Balance
+                              │
+                    Unlock / Burn / Withdraw
+```
 
-iSmartBonus existed before the Colosseum hackathon as a working WordPress-based loyalty platform.
+The WordPress application handles the user and merchant experience while custom modules implement iSmartBonus-specific business logic and integrations.
 
-This repository is used to document and contain custom development associated with the project's work during the hackathon.
-
-Pre-existing functionality and hackathon development are disclosed separately so that the development completed during the hackathon can be clearly identified.
-
-See:
-
-`docs/hackathon-development.md`
+---
 
 ## Repository Structure
 
@@ -125,21 +214,83 @@ ismartbonus-colosseum/
 ├── README.md
 ├── docs/
 │   └── hackathon-development.md
-└── [additional source modules will be added as development progresses]
+│
+└── src/
+    └── offline-partners/
+        └── signed-partner-qr.php
 ```
+
+Additional modules will be added as development progresses.
+
+Planned repository organization:
+
+```text
+src/
+├── offline-partners/
+├── online-partners/
+├── purchases/
+├── bonuses/
+├── withdrawals/
+├── integrations/
+└── solana/
+```
+
+---
+
+## Current Source Module
+
+### Signed Offline Partner QR
+
+`src/offline-partners/signed-partner-qr.php`
+
+This module contains the signed QR logic used for purchases at physical merchant locations.
+
+The QR flow includes:
+
+- user identification;
+- unique token generation;
+- timestamp validation;
+- HMAC-SHA256 signatures;
+- signature verification;
+- expiration validation;
+- protection against modified QR payloads.
+
+This module is specifically designed for offline merchants.
+
+Online marketplaces and affiliate partners use separate attribution mechanisms.
+
+---
+
+## Hackathon Development
+
+iSmartBonus existed before the Colosseum hackathon as a working WordPress-based loyalty platform.
+
+This repository documents and contains custom development associated with the project's work during the hackathon.
+
+Pre-existing functionality and hackathon development are disclosed separately so that work completed during the hackathon can be clearly identified.
+
+See:
+
+`docs/hackathon-development.md`
+
+As development progresses, additional iSmartBonus modules will be extracted, documented, improved, and added to this repository.
+
+---
 
 ## Live Product
 
 iSmartBonus is a working product with real users and merchant integrations.
 
-Website: https://ismartbonus.com
+**Website:** https://ismartbonus.com
+
+---
 
 ## Vision
 
 Our goal is to build a global loyalty infrastructure where rewards from everyday purchases are no longer isolated points inside individual stores.
 
 One ecosystem.  
-Multiple merchants.  
+Physical and online merchants.  
 Real purchases.  
 Digital value.
 
